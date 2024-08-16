@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../layouts/Header.astro";
+import Footer from "../../layouts/Footer.astro";
+
+export async function getStaticPaths() {
+  const excersise = await getCollection("exercise");
+
+  return excersise.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+const { entry } = Astro.props;
+console.log(entry);
+---
+
+<Layout>
+  <main>
+    <Header />
+    <section>
+      <h1>
+        {entry.data.name}
+      </h1>
+    </section>
+  </main>
+  <Footer />
+</Layout>

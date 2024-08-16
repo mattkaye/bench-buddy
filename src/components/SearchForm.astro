@@ -1,0 +1,56 @@
+---
+type Props = {
+  excerciseEntries: object[];
+};
+
+const { excerciseEntries } = Astro.props;
+---
+
+<script>
+  document.getElementById("searchForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log(e);
+  });
+</script>
+
+<form id='searchForm'>
+  {excerciseEntries.map((item) => <p>{item.data.name}</p>)}
+  <div>
+    <label for='muscle-groups'>Muscule Groups</label>
+    <input type='text' id='muscle-groups' />
+  </div>
+  <div>
+    <label for='training-modalities'>Training Modalities</label>
+    <input type='text' id='training-modalities' />
+  </div>
+  <div>
+    <label for='equipment'>Equipment</label>
+    <input type='text' id='equipment' />
+  </div>
+  <div>
+    <label for='difficulty-level'>Level</label>
+    <input type='text' id='difficulty-level' />
+  </div>
+  <input type='submit' value='Get After It!' />
+</form>
+
+<style>
+  form {
+    @apply flex gap-6 items-center;
+
+    > div {
+      @apply flex flex-col;
+
+      label {
+        @apply block;
+      }
+
+      input[type="text"] {
+        @apply border p-3;
+      }
+    }
+    input[type="submit"] {
+      @apply cursor-pointer border bg-lime-300 self-center;
+    }
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import { getImage } from "astro:assets";
+import heavyPlate from "../assets/images/weight-plate.png";
+import SearchForm from "../components/SearchForm.astro";
+let weight = await getImage({
+  src: heavyPlate,
+  width: 60,
+  height: 60,
+});
+const weightBG = `url(${weight.src})`;
+
+const excerciseEntries = await getCollection("exercise");
+console.log(excerciseEntries);
+
+type Props = {};
+
+const {} = Astro.props;
+---
+
+<section class='flex gap-6'>
+  <h1>BenchBuddy</h1>
+  <!-- <SearchForm client:load excerciseEntries={excerciseEntries} /> -->
+</section>
+
+<style define:vars={{ weightBG }}>
+  h1 {
+    @apply text-6xl font-black text-black relative pl-20;
+    font-family: "Cabin", sans-serif;
+
+    &:before {
+      @apply content-[""] absolute w-[60px] h-[60px] left-0 top-0;
+      background: var(--weightBG) no-repeat;
+    }
+  }
+</style>
