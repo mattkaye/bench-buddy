@@ -1,6 +1,8 @@
 ---
 import { getImage } from "astro:assets";
 import heavyPlate from "../assets/images/weight-plate.png";
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
 let weight = await getImage({
   src: heavyPlate,
   format: "webp",
@@ -28,12 +30,20 @@ let weight = await getImage({
     <title>BenchBuddy :: Light Weight Baby!</title>
   </head>
   <body>
-    <slot />
+    <main>
+      <Header />
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
 
 <style is:global>
   main {
     @apply container mx-auto w-full py-12 relative;
+  }
+
+  section {
+    @apply flex flex-col gap-6;
   }
 </style>

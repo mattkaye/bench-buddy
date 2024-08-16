@@ -11,19 +11,23 @@ let weight = await getImage({
 const weightBG = `url(${weight.src})`;
 
 const excerciseEntries = await getCollection("exercise");
-console.log(excerciseEntries);
 
 type Props = {};
-
+console.log("mounted");
 const {} = Astro.props;
 ---
 
-<section class='flex gap-6'>
-  <h1>BenchBuddy</h1>
+<header>
+  <a href='/'>
+    <h1>BenchBuddy</h1>
+  </a>
   <!-- <SearchForm client:load excerciseEntries={excerciseEntries} /> -->
-</section>
+</header>
 
 <style define:vars={{ weightBG }}>
+  header {
+    @apply flex gap-6 mb-6;
+  }
   h1 {
     @apply text-6xl font-black text-black relative pl-20;
     font-family: "Cabin", sans-serif;

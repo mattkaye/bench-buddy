@@ -1,8 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
-import Header from "../../layouts/Header.astro";
-import Footer from "../../layouts/Footer.astro";
 
 export async function getStaticPaths() {
   const excersise = await getCollection("exercise");
@@ -12,18 +11,45 @@ export async function getStaticPaths() {
     props: { entry },
   }));
 }
+
+const params = Astro.url.pathname.split('/');
+const exerciseType = params[params.length - 1]
+const allImages = await Astro.glob('../../assets/images/exercise/*/*.jpg');
+const images = allImages.filter(image => image.default.src.includes(exerciseType));
+
 const { entry } = Astro.props;
-console.log(entry);
 ---
 
 <Layout>
-  <main>
-    <Header />
-    <section>
-      <h1>
-        {entry.data.name}
-      </h1>
-    </section>
-  </main>
-  <Footer />
+  <section>
+    <h1>
+      {entry.data.name} (<small class="text-yellow-500">{entry.data.level}</small>)
+    </h1>
+    <h2>
+      Primary Muscles Targeted: {entry.data.primaryMuscles.map((item: string) => <p>{item}</p>)}
+    </h2>
+    {entry.data.secondaryMuscles.length > 0 && (
+    <h2>
+      Secondary Muscles Targeted: {entry.data.secondaryMuscles.map((item: string) => <p>{item}</p>)}
+    </h2>
+    )}
+    
+    {
+      images.map((image, index) => {
+        return (
+          <Image
+            src={image.default}
+            alt=`${entry.data.name} ${index === 0 ? 'Starting': 'Finishing'} Position`
+          />
+        );
+      })
+    }
+    {entry.data.instructions.map((line: string) => <p>{line}</p>)}
+  </section>
 </Layout>
+
+<style>
+  h1 {
+    @apply text-3xl;
+  }
+</style>
