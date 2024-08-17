@@ -9,12 +9,7 @@ let weight = await getImage({
   height: 60,
 });
 const weightBG = `url(${weight.src})`;
-
 const excerciseEntries = await getCollection("exercise");
-
-type Props = {};
-console.log("mounted");
-const {} = Astro.props;
 ---
 
 <header>

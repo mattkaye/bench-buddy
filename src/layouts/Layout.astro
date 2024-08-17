@@ -9,6 +9,8 @@ let weight = await getImage({
   width: 32,
   height: 32,
 });
+
+const { title = "Light Weight Baby!" } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,11 +29,11 @@ let weight = await getImage({
       href='https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'
       rel='stylesheet'
     />
-    <title>BenchBuddy :: Light Weight Baby!</title>
+    <title>BenchBuddy - {title}</title>
   </head>
   <body>
+    <Header />
     <main>
-      <Header />
       <slot />
     </main>
     <Footer />
@@ -39,6 +41,10 @@ let weight = await getImage({
 </html>
 
 <style is:global>
+  body {
+    font-family: "Montserrat", sans-serif;
+  }
+
   main {
     @apply container mx-auto w-full py-12 relative;
   }

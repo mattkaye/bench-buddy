@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const params = Astro.url.pathname.split('/');
+const params = Astro.url.pathname.split('/').filter(x => x);
 const exerciseType = params[params.length - 1]
 const allImages = await Astro.glob('../../assets/images/exercise/*/*.jpg');
 const images = allImages.filter(image => image.default.src.includes(exerciseType));
@@ -20,7 +20,7 @@ const images = allImages.filter(image => image.default.src.includes(exerciseType
 const { entry } = Astro.props;
 ---
 
-<Layout>
+<Layout title={entry.data.name}>
   <section>
     <h1>
       {entry.data.name} (<small class="text-yellow-500">{entry.data.level}</small>)
@@ -38,6 +38,7 @@ const { entry } = Astro.props;
       images.map((image, index) => {
         return (
           <Image
+            loading={"eager"}
             src={image.default}
             alt=`${entry.data.name} ${index === 0 ? 'Starting': 'Finishing'} Position`
           />
