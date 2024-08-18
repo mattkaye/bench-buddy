@@ -4,23 +4,12 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 
 const allExcersise = await getCollection("exercise");
-const sample = allExcersise.slice(0, -1);
+const sample = allExcersise.slice(0, 6);
 // const sample = allExcersise.slice(0, );
 ---
 
 <Layout>
   <section class='flex flex-row flex-wrap justify-center gap-12'>
-    {
-      sample.map((card) => (
-        <Card
-          exerciseName={card.data.name}
-          imagePath={card.data.images[0]}
-          primaryMuscles={card.data.primaryMuscles}
-          link={card.id}
-          level={card.data.level}
-          mechanic={card.data.mechanic}
-        />
-      ))
-    }
+    {sample.map((card) => <Card id={card.id} />)}
   </section>
 </Layout>

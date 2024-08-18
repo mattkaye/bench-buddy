@@ -13,7 +13,14 @@ let weight = await getImage({
 const { title = "Light Weight Baby!" } = Astro.props;
 ---
 
-<!doctype html>
+<script>
+  // import SlimSelect from "slim-select";
+
+  // new SlimSelect({
+  //   select: "#selectElement",
+  // });
+</script>
+
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
@@ -29,9 +36,17 @@ const { title = "Light Weight Baby!" } = Astro.props;
       href='https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'
       rel='stylesheet'
     />
+
+    <script src='https://unpkg.com/slim-select@latest/dist/slimselect.min.js'
+    ></script>
+    <link
+      rel='stylesheet'
+      href='https://unpkg.com/slim-select@latest/dist/slimselect.css'
+    />
+
     <title>BenchBuddy - {title}</title>
   </head>
-  <body>
+  <body class='mt-10'>
     <Header />
     <main>
       <slot />

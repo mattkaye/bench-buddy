@@ -1,30 +1,36 @@
 ---
 import { EFFORT_LEVEL } from "../customTypes";
-import testImage from "../assets/images/exercise/Wide-Grip_Decline_Barbell_Pullover/0.jpg";
 import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+
 interface Props {
-  exerciseName: string;
-  imagePath: string;
-  primaryMuscles: string[];
-  link: string;
-  level: string;
-  mechanic: string;
+  id: string;
 }
+const { id } = Astro.props;
+const entry = await getEntry("exercise", id);
 
-const { exerciseName, imagePath, primaryMuscles, link, level, mechanic } =
-  Astro.props;
+const allImages = await Astro.glob("../assets/images/exercise/*/*.jpg");
+const images = allImages.filter((image) => image.default.src.includes(id));
 
-const allImages = await Astro.glob("../assets/images/exercise/*/0.jpg");
-const startImage = allImages.filter((image) =>
-  image.default.src.includes(link)
-)[0];
+let exerciseName = "";
+let level;
+let mechanic;
+let primaryMuscles;
+let effortLevelColor;
+let effortLevelEmoji;
 
-const effortLevelColor = EFFORT_LEVEL[level].color;
-const effortLevelEmoji = EFFORT_LEVEL[level].emoji;
+if (entry) {
+  exerciseName = entry.data.name;
+  level = entry.data.level;
+  mechanic = entry.data.mechanic;
+  primaryMuscles = entry.data.primaryMuscles;
+  effortLevelColor = EFFORT_LEVEL[level].color;
+  effortLevelEmoji = EFFORT_LEVEL[level].emoji;
+}
 ---
 
 <div>
-  <a href=`/exercise/${link}`>
+  <a href=`/exercise/${id}`>
     <article>
       <h1>{exerciseName}</h1>
       <div class='flex items-center justify-between'>
@@ -36,26 +42,43 @@ const effortLevelEmoji = EFFORT_LEVEL[level].emoji;
       </div>
       <p>
         🎯 Target: <span
-          >{primaryMuscles.map((muscle) => muscle).join(", ")}</span
+          >{primaryMuscles.map((muscle: string) => muscle).join(", ")}</span
         >
       </p>
-      <Image
-        src={startImage.default}
-        alt='fooo'
-        width={300}
-        height={200}
-        class='object-cover max-h-[190px]'
-      />
+
+      <div class='fadein'>
+        {
+          images.map((image) => (
+            <Image
+              src={image.default}
+              alt={exerciseName}
+              width={300}
+              height={200}
+              class='object-cover max-h-[190px]'
+            />
+          ))
+        }
+      </div>
     </article>
   </a>
 </div>
-
 <style define:vars={{ effortLevelColor, effortLevelEmoji }}>
   article {
     @apply border rounded-xl flex flex-col justify-start p-3 transition-all bg-slate-100 duration-300 gap-4 w-72 relative overflow-clip h-[380px];
 
     &:hover {
       @apply -translate-y-2 bg-emerald-100 drop-shadow-md;
+      .fadein {
+        img {
+          animation-name: fade;
+          animation-iteration-count: infinite;
+          animation-duration: 4s;
+
+          &:nth-of-type(2) {
+            animation-delay: -2s;
+          }
+        }
+      }
     }
 
     h1 {
@@ -80,6 +103,20 @@ const effortLevelEmoji = EFFORT_LEVEL[level].emoji;
     }
     img {
       @apply w-full absolute left-0 bottom-0;
+    }
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    8%,
+    50% {
+      opacity: 1;
+    }
+    62.5%,
+    100% {
+      opacity: 0;
     }
   }
 </style>
