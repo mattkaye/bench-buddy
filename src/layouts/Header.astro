@@ -16,19 +16,22 @@ const weightBG = `url(${weight.src})`;
 ---
 
 <script>
+  // Library works but TS imports are not found. Fix has to come from library author.
+  // @ts-ignore
   import SlimSelect from "slim-select";
 
   new SlimSelect({
     select: "#muscle-groups",
     settings: {
-      placeholderText: "Muscle Groups",
+      placeholderText: "Muscle",
+      showOptionTooltips: true,
     },
   });
 
   new SlimSelect({
     select: "#training-modalities",
     settings: {
-      placeholderText: "Training Modalities",
+      placeholderText: "Modalities",
     },
   });
 
@@ -53,64 +56,53 @@ const weightBG = `url(${weight.src})`;
     <h2 class='mt-2 text-slate-600'>Get After It!</h2>
   </a>
   <form>
-    <div>
-      <select
-        id='muscle-groups'
-        class='border rounded-lg'
-        name='muscle-groups'
-        multiple
-      >
-        {
-          MUSCLE_GROUPS.map((muscle: string) => (
-            <option class='capitalize' value={muscle}>
-              {muscle}
-            </option>
-          ))
-        }
-      </select>
-    </div>
-    <div>
-      <select id='training-modalities' name='training-modalities' multiple>
-        {
-          TRAINING_MODALITIES.map((mode: string) => (
-            <option value={mode}>{mode}</option>
-          ))
-        }
-      </select>
-    </div>
-    <div>
-      <select id='equipment' name='equipment' multiple>
-        {
-          EQUIPMENT.map((equipment: string) => (
-            <option value={equipment}>{equipment}</option>
-          ))
-        }
-      </select>
-    </div>
+    <select
+      id='muscle-groups'
+      class='border border-slate-500'
+      name='muscle-groups'
+      multiple
+    >
+      {
+        MUSCLE_GROUPS.map((muscle: string) => (
+          <option class='capitalize' value={muscle}>
+            {muscle}
+          </option>
+        ))
+      }
+    </select>
+    <select
+      class='w-full'
+      id='training-modalities'
+      name='training-modalities'
+      multiple
+    >
+      {
+        TRAINING_MODALITIES.map((mode: string) => (
+          <option value={mode}>{mode}</option>
+        ))
+      }
+    </select>
+    <select id='equipment' name='equipment' multiple>
+      {
+        EQUIPMENT.map((equipment: string) => (
+          <option value={equipment}>{equipment}</option>
+        ))
+      }
+    </select>
 
-    <div>
-      <select id='effort-level' name='effort-level' multiple>
-        {
-          Object.keys(EFFORT_LEVEL).map((level: string) => (
-            <option value={level}>{level}</option>
-          ))
-        }
-      </select>
-    </div>
+    <select id='effort-level' name='effort-level' multiple>
+      {
+        Object.keys(EFFORT_LEVEL).map((level: string) => (
+          <option value={level}>{level}</option>
+        ))
+      }
+    </select>
   </form>
 </header>
 
 <style>
   form {
-    @apply flex gap-6 items-center;
-
-    > div {
-      @apply flex flex-col;
-
-      option {
-        @apply capitalize;
-      }
-    }
+    @apply flex gap-6;
   }
 </style>
 

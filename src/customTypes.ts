@@ -1,3 +1,21 @@
+export type Exercise = {
+  id: string;
+  collection: string;
+  data: {
+    name: string;
+    force: string;
+    level: string;
+    mechanic: string;
+    equipment: string;
+    primaryMuscles: string[];
+    secondaryMuscles?: string[];
+    instructions: string[];
+    category: string[];
+    images: string[];
+    id: string;
+  };
+};
+
 export const EFFORT_LEVEL: Record<string, any> = {
   beginner: {
     color: "green",

@@ -2,14 +2,16 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
+import type { Exercise } from "../customTypes";
 
 const allExcersise = await getCollection("exercise");
 const sample = allExcersise.slice(0, 6);
+console.log(sample);
 // const sample = allExcersise.slice(0, );
 ---
 
 <Layout>
   <section class='flex flex-row flex-wrap justify-center gap-12'>
-    {sample.map((card) => <Card id={card.id} />)}
+    {sample.map((card: Exercise) => <Card id={card.id} />)}
   </section>
 </Layout>
