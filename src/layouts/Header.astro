@@ -15,41 +15,6 @@ let weight = await getImage({
 const weightBG = `url(${weight.src})`;
 ---
 
-<script>
-  // Library works but TS imports are not found. Fix has to come from library author.
-  // @ts-ignore
-  import SlimSelect from "slim-select";
-
-  new SlimSelect({
-    select: "#muscle-groups",
-    settings: {
-      placeholderText: "Muscle",
-      showOptionTooltips: true,
-    },
-  });
-
-  new SlimSelect({
-    select: "#training-modalities",
-    settings: {
-      placeholderText: "Modalities",
-    },
-  });
-
-  new SlimSelect({
-    select: "#equipment",
-    settings: {
-      placeholderText: "Equipment",
-    },
-  });
-
-  new SlimSelect({
-    select: "#effort-level",
-    settings: {
-      placeholderText: "Difficulty Level",
-    },
-  });
-</script>
-
 <header class='container flex items-center justify-between mx-auto'>
   <a href='/'>
     <h1>Bench<span class='italic font-thin text-slate-600'>Buddy</span></h1>

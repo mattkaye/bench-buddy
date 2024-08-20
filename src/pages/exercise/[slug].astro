@@ -4,6 +4,8 @@ import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import type { Exercise } from "../../customTypes";
 import { EFFORT_LEVEL } from "../../customTypes";
+import DumbBell from "../../assets/svg/dumbell.svg?raw";
+import Arrow from "../../assets/svg/arrow.svg?raw";
 
 export async function getStaticPaths() {
   const excersise = await getCollection("exercise");
@@ -14,13 +16,12 @@ export async function getStaticPaths() {
   }));
 }
 
-const params = Astro.url.pathname.split('/').filter(x => x);
-const exerciseType = params[params.length - 1]
+const {slug} = Astro.params;
 const allImages = await Astro.glob('../../assets/images/exercise/*/*.jpg');
-const images = allImages.filter(image => image.default.src.includes(exerciseType));
+const images = allImages.filter(image => image.default.src.includes(slug));
 
 const { entry } = Astro.props;
-const {exerciseName = entry.data.name, mechanic, instructions, level, primaryMuscles, secondaryMuscles} = entry.data;
+const {name, mechanic, instructions, level, primaryMuscles, secondaryMuscles} = entry.data;
 
 const effortLevel = {
   effortLevelColor: EFFORT_LEVEL[level].color,
@@ -28,43 +29,43 @@ const effortLevel = {
 }
 ---
 
-<Layout title={exerciseName}>
+<Layout title={name}>
   <section>
-    <div>
+    <div class="pictures basis-2/5">
       {
         images.map((image, index) => {
           return (
             <Image
-              loading={"eager"}
+              loading="eager"
               src={image.default}
-              alt=`${exerciseName} ${index === 0 ? 'Starting': 'Finishing'} Position`
+              alt=`${name} ${index === 0 ? 'Starting': 'Finishing'} Position`
             />
           );
         })
       }
     </div>
-    <div class="flex flex-col gap-6">
-      <div class="flex justify-start gap-4">
-        <h1>
-          {exerciseName}
-        </h1>
-        <p class="effort-level">{level} {effortLevel.effortLevelEmoji}</p>
-        <button class="relative inline-flex items-center justify-center px-6 ml-auto overflow-hidden font-medium rounded-md group bg-neutral-950 text-neutral-200">
+    <div class="flex flex-col flex-1 gap-6">
+      <div class="flex items-start gap-4">
+        <div class="flex flex-col">
+          <h1>
+            {name}
+          </h1>
+          <p class="self-start p-1 px-2 text-base text-white uppercase rounded-md effort-level">{level} {effortLevel.effortLevelEmoji}</p>
+        </div>
+        <button class="relative inline-flex items-center justify-center px-6 ml-auto overflow-hidden font-medium rounded-md group bg-neutral-950 h-11 text-neutral-200">
           <span>Add To Workout</span>
           <div class="w-0 translate-x-[100%] pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-1 group-hover:opacity-100">
-             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
-                <path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
-             </svg>
+            💪
           </div>
        </button>
       </div>
       <div class="flex flex-col gap-2">
-        <h2 class="flex gap-2">
-          Primary 💪 {primaryMuscles.map((item: string) => <p class="pill">{item}</p>)}
+        <h2 class="flex items-center gap-2">
+          Primary <Fragment set:html={DumbBell} /> {primaryMuscles.map((item: string) => <p class="pill">{item}</p>)}
         </h2>
         {secondaryMuscles.length > 0 && (
           <h3 class="flex gap-2">
-            Secondary 💪 {secondaryMuscles.map((item: string) => <p class="pill secondary">{item}</p>)}
+            Secondary <Fragment set:html={DumbBell} /> {secondaryMuscles.map((item: string) => <p class="pill secondary">{item}</p>)}
           </h3>
         )}
         
@@ -75,15 +76,13 @@ const effortLevel = {
         )}
         
         </div>
-      <div class="">
+      <div>
         <h5 class="font-semibold">Instructions:</h5>
         {instructions.map((line: string) => <p class="pb-3 text-sm">{line}</p>)}
 
         <a href="/" class="relative inline-flex items-center justify-center px-6 mt-8 ml-auto overflow-hidden font-medium rounded-md h-11 group bg-neutral-950 text-neutral-200">
           <div class="w-0 translate-x-[-100%] pr-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pr-1 group-hover:opacity-100">
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 rotate-180">
-              <path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
-           </svg>
+            <Fragment set:html={Arrow} />
           </div>
           <span>Back to Exercises</span>
        </a>
@@ -95,32 +94,38 @@ const effortLevel = {
 
 <style define:vars={{ ...effortLevel }}>
   section {
-    @apply flex flex-row gap-12;
-  }
-  h1 {
-    @apply text-4xl;
-  }
-
-  .effort-level {
-      @apply p-1 px-2 rounded-md text-base uppercase text-white self-center;
-      background-color: var(--effortLevelColor);
-
-      &:before {
-        @apply mr-1;
-      }
+    @apply flex flex-row gap-12 relative;
+    h1 {
+      @apply text-4xl;
     }
-
+    
+    .effort-level {
+      background-color: var(--effortLevelColor);
+    }
+    
     .pill {
       @apply p-1 px-2 text-xs text-white uppercase rounded-md bg-slate-600 self-center;
-
+      
       &.secondary {
         @apply bg-slate-400;
       }
-
+      
       &.tertiary {
         @apply bg-blue-400;
       }
-      
     }
 
+    .pictures {
+      img {
+        @apply relative z-10 border-2 p-2 rounded-md;
+        animation-name: fade;
+        animation-iteration-count: infinite;
+        animation-duration: 4s;
+      }
+      img:nth-of-type(2) {
+        @apply -translate-y-full z-auto;
+        animation-delay: -2s;
+      }
+    }
+  }
 </style>

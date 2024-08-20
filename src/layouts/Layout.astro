@@ -36,14 +36,6 @@ const { title = "Light Weight Baby!" } = Astro.props;
       href='https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'
       rel='stylesheet'
     />
-
-    <script src='https://unpkg.com/slim-select@latest/dist/slimselect.min.js'
-    ></script>
-    <link
-      rel='stylesheet'
-      href='https://unpkg.com/slim-select@latest/dist/slimselect.css'
-    />
-
     <title>BenchBuddy - {title}</title>
   </head>
   <body class='mt-10'>
@@ -66,5 +58,19 @@ const { title = "Light Weight Baby!" } = Astro.props;
 
   section {
     @apply flex flex-col gap-6;
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    8%,
+    50% {
+      opacity: 1;
+    }
+    62.5%,
+    100% {
+      opacity: 0;
+    }
   }
 </style>
