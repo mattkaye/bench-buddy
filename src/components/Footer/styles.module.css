@@ -1,0 +1,8 @@
+.componentWrapper {
+  background-color: red;
+  padding: 10px;
+
+  h1 {
+    color: rgb(31, 42, 113);
+  }
+}
