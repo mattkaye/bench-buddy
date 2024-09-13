@@ -1,10 +1,11 @@
 import ExerciseCard from "../ExerciseCard";
 import styles from "./styles.module.css";
-import allExercises from "../../all-exercises.json";
+import allExercises from "../../data/all-exercises.json";
 import { Exercise } from "../../types";
 
 const result: Exercise[] = allExercises.filter((exercise) => {
-  return exercise.primaryMuscles.includes("chest");
+  // return exercise.primaryMuscles.includes("chest");
+  return exercise;
 });
 
 console.log(result);

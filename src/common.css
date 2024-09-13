@@ -2,6 +2,7 @@
 
 :root {
   --black: #010101;
+  --deep-blue: #0f172a;
   --beige: #f2f0ea;
   --yellow: #edcf5d;
   --grey: #a4a4a4;
@@ -22,12 +23,8 @@ body {
   font-weight: normal;
   font-style: normal;
   height: 100%;
-}
-
-img {
-  max-width: 100%;
-  object-fit: cover;
-  font-style: italic;
+  letter-spacing: 1px;
+  background-color: var(--beige);
 }
 
 #root {
@@ -36,4 +33,38 @@ img {
   padding: 2rem;
   display: grid;
   gap: 2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+  line-height: 1.2;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img {
+  max-width: 100%;
+  object-fit: cover;
+  font-style: italic;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  8%,
+  50% {
+    opacity: 1;
+  }
+  62.5%,
+  100% {
+    opacity: 0;
+  }
 }
