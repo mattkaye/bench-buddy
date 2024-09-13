@@ -92,13 +92,13 @@
         color: white;
         font-size: 0.7rem;
         cursor: pointer;
-        transition: all 0.2s ease-in-out;
+        transition: var(--common-transition);
 
         .showMeIcon {
           width: 0;
           height: 1rem;
           margin-left: 5px;
-          transition: all 0.2s ease-in-out;
+          transition: var(--common-transition);
         }
 
         &:hover {
