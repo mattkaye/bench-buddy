@@ -11,9 +11,6 @@ const Header = () => {
       </div>
       <form>
         <select name='bench-type' id='bench-type'>
-          <option selected disabled>
-            Choose one
-          </option>
           <option value='glute'>Glute</option>
           <option value='kettlebell'>Kettlebell</option>
           <option value='powerlifting'>Powerlifting</option>
@@ -22,9 +19,6 @@ const Header = () => {
           <option value='astro'>Astro</option>
         </select>
         <select name='bench-type' id='bench-type'>
-          <option selected disabled>
-            Choose one
-          </option>
           <option value='glute'>Glute</option>
           <option value='kettlebell'>Kettlebell</option>
           <option value='powerlifting'>Powerlifting</option>
@@ -33,9 +27,6 @@ const Header = () => {
           <option value='astro'>Astro</option>
         </select>
         <select name='bench-type' id='bench-type'>
-          <option selected disabled>
-            Choose one
-          </option>
           <option value='glute'>Glute</option>
           <option value='kettlebell'>Kettlebell</option>
           <option value='powerlifting'>Powerlifting</option>

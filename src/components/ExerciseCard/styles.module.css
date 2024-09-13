@@ -1,2 +1,5 @@
 .componentWrapper {
+  img {
+    aspect-ratio: 1/1;
+  }
 }
