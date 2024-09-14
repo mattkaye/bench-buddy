@@ -6,7 +6,8 @@
     display: grid;
     align-items: center;
     justify-items: center;
-    grid-template-columns: 60px 1fr;
+    grid-template-columns: 50px 1fr;
+    gap: 0.5rem;
 
     h1 {
       color: var(--black);
@@ -39,7 +40,38 @@
   }
 
   .cartButton {
+    display: flex;
     align-self: center;
+    position: relative;
+    gap: 0.25rem;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
     margin-left: auto;
+
+    &:after {
+      content: "1";
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      transform: translateY(-35%);
+      width: 10px;
+      height: 10px;
+      background-color: var(--red);
+      border-radius: 100%;
+      padding: 8px;
+      left: 1.5rem;
+      font-size: 0.75rem;
+      color: white;
+    }
+
+    .notebook {
+      width: 2.5rem;
+      height: 2.5rem;
+      color: var(--black);
+    }
   }
 }

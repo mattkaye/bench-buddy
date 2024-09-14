@@ -3,12 +3,7 @@ import styles from "./styles.module.css";
 const Footer = () => {
   return (
     <footer className={styles.componentWrapper}>
-      <p>
-        Made with ❤️ in New England by{" "}
-        <a href='http://' target='_blank' rel='noopener noreferrer'>
-          Matt
-        </a>
-      </p>
+      <p>Made with ❤️ in New England by Matt</p>
     </footer>
   );
 };

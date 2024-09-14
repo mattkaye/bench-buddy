@@ -1,3 +1,5 @@
+import { IconContext } from "react-icons";
+import { PiNotebookLight } from "react-icons/pi";
 import styles from "./styles.module.css";
 
 const Header = () => {
@@ -35,7 +37,12 @@ const Header = () => {
           <option value='blah'>Blah</option>
         </select>
       </form>
-      <button className={styles.cartButton}>Add to Cart</button>
+      <button className={styles.cartButton}>
+        <IconContext.Provider value={{ className: styles.notebook }}>
+          <PiNotebookLight />
+          <p>My Program</p>
+        </IconContext.Provider>
+      </button>
     </header>
   );
 };
