@@ -92,7 +92,6 @@
         color: white;
         font-size: 0.7rem;
         cursor: pointer;
-        transition: var(--common-transition);
 
         .showMeIcon {
           width: 0;
@@ -102,12 +101,20 @@
         }
 
         &:hover {
-          background-color: var(--yellow);
-          color: var(--deep-blue);
-
           .showMeIcon {
             width: 1rem;
-            color: var(--deep-blue);
+            color: white;
+          }
+        }
+
+        &.btnAdded {
+          background-color: var(--orange);
+          color: white;
+          transition: none;
+
+          &:hover {
+            background-color: var(--orange);
+            color: white;
           }
         }
       }

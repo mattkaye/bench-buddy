@@ -4,10 +4,10 @@ const Header = () => {
   return (
     <header className={styles.componentWrapper}>
       <div>
+        <img src='/images/logo.png' alt='BenchBuddy Logo' />
         <h1>
           Bench<span>Buddy</span>
         </h1>
-        <p>Get After It</p>
       </div>
       <form>
         <select name='bench-type' id='bench-type'>
@@ -16,7 +16,7 @@ const Header = () => {
           <option value='powerlifting'>Powerlifting</option>
           <option value='plyometrics'>Plyometrics</option>
           <option value='nanostores'>Nanostores</option>
-          <option value='astro'>Astro</option>
+          <option value='blah'>Blah</option>
         </select>
         <select name='bench-type' id='bench-type'>
           <option value='glute'>Glute</option>
@@ -24,7 +24,7 @@ const Header = () => {
           <option value='powerlifting'>Powerlifting</option>
           <option value='plyometrics'>Plyometrics</option>
           <option value='nanostores'>Nanostores</option>
-          <option value='astro'>Astro</option>
+          <option value='blah'>Blah</option>
         </select>
         <select name='bench-type' id='bench-type'>
           <option value='glute'>Glute</option>
@@ -32,7 +32,7 @@ const Header = () => {
           <option value='powerlifting'>Powerlifting</option>
           <option value='plyometrics'>Plyometrics</option>
           <option value='nanostores'>Nanostores</option>
-          <option value='astro'>Astro</option>
+          <option value='blah'>Blah</option>
         </select>
       </form>
       <button className={styles.cartButton}>Add to Cart</button>

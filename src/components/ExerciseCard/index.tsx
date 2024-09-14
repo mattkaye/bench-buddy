@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { IconContext } from "react-icons";
 import { RxOpenInNewWindow } from "react-icons/rx";
 import { SiLevelsdotfyi } from "react-icons/si";
@@ -6,6 +7,27 @@ import { Exercise } from "../../types";
 import styles from "./styles.module.css";
 
 const ExerciseCard = ({ data }: { data: Exercise }) => {
+  const [added, setAdded] = useState(false);
+
+  const handleToggleExerciseAdded = () => {
+    setAdded((prev) => !prev);
+  };
+
+  const toggleExerciseButton = () => {
+    const btnProps = {
+      classThing: added ? styles.btnAdded : styles.btnRemove,
+      messageText: added ? "Remove" : "Add It",
+    };
+    return (
+      <button
+        onClick={handleToggleExerciseAdded}
+        className={btnProps.classThing}
+      >
+        {btnProps.messageText}
+      </button>
+    );
+  };
+
   return (
     <div className={styles.componentWrapper}>
       <div className={styles.imageWrapper}>
@@ -37,7 +59,8 @@ const ExerciseCard = ({ data }: { data: Exercise }) => {
           </div>
         </IconContext.Provider>
         <div className={styles.buttonWrapper}>
-          <button>Add It</button>
+          {/* <button onClick={handleToggleExerciseAdded}>Add It</button> */}
+          {toggleExerciseButton()}
           <IconContext.Provider value={{ className: styles.showMeIcon }}>
             <button>
               Show Me <RxOpenInNewWindow />

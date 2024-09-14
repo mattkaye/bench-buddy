@@ -1,9 +1,9 @@
 import { IconContext } from "react-icons";
 import { FaCircleChevronUp } from "react-icons/fa6";
-import "./common.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ExerciseGrid from "./components/ExerciseGrid";
+import "./common.css";
 
 function App() {
   return (
