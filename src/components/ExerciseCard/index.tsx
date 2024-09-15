@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IconContext } from "react-icons";
 import { RxOpenInNewWindow } from "react-icons/rx";
 import { SiLevelsdotfyi } from "react-icons/si";
-import { GiStrongMan, GiWeight } from "react-icons/gi";
+import { GiWeight } from "react-icons/gi";
 import { Exercise } from "../../types";
 import styles from "./styles.module.css";
 
@@ -16,7 +16,7 @@ const ExerciseCard = ({ data }: { data: Exercise }) => {
   const toggleExerciseButton = () => {
     const btnProps = {
       classThing: added ? styles.btnAdded : styles.btnRemove,
-      messageText: added ? "Remove" : "Add It",
+      messageText: added ? "Added!" : "Add It",
     };
     return (
       <button
@@ -47,11 +47,6 @@ const ExerciseCard = ({ data }: { data: Exercise }) => {
               <SiLevelsdotfyi />
               <span>{data.level}</span>
             </p>
-            {data.mechanic && (
-              <p>
-                <GiStrongMan /> <span> {data.mechanic}</span>
-              </p>
-            )}
             <p>
               <GiWeight />
               <span>{data.primaryMuscles}</span>
@@ -59,7 +54,6 @@ const ExerciseCard = ({ data }: { data: Exercise }) => {
           </div>
         </IconContext.Provider>
         <div className={styles.buttonWrapper}>
-          {/* <button onClick={handleToggleExerciseAdded}>Add It</button> */}
           {toggleExerciseButton()}
           <IconContext.Provider value={{ className: styles.showMeIcon }}>
             <button>

@@ -1,0 +1,13 @@
+.filterForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    grid-column: 1 / -1;
+    z-index: 10;
+  }
+}

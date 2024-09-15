@@ -1,11 +1,11 @@
 .componentWrapper {
-  display: flex;
-  gap: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 
   > div {
     display: grid;
     align-items: center;
-    justify-items: center;
     grid-template-columns: 50px 1fr;
     gap: 0.5rem;
 
@@ -25,18 +25,11 @@
   }
 
   form {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: center;
-    gap: 1rem 3rem;
-    margin: 0;
-    padding: 0;
-
-    select {
-      padding: 10px;
-      width: auto;
-    }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    grid-column: 1 / -1;
+    z-index: 10;
   }
 
   .cartButton {

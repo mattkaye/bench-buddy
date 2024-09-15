@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { MultiSelect } from "react-multi-select-component";
 import ExerciseCard from "../ExerciseCard";
 import styles from "./styles.module.css";
 import allExercises from "../../data/all-exercises.json";
@@ -11,34 +9,9 @@ const result: Exercise[] = allExercises.filter((exercise) => {
 });
 // console.log(result);
 
-const options = [
-  { label: "Grapes 🍇", value: "grapes" },
-  { label: "Mango 🥭", value: "mango" },
-  { label: "Strawberry 🍓", value: "strawberry" },
-];
-
 const ExerciseGrid = () => {
-  const [selected, setSelected] = useState([]);
-
   return (
     <section className={styles.componentWrapper}>
-      <h1>Select Fruits</h1>
-      <pre>{JSON.stringify(selected)}</pre>
-      <MultiSelect
-        options={options}
-        value={selected}
-        onChange={setSelected}
-        labelledBy='Select'
-      />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <ul>
         {result.map((exercise) => (
           <li key={exercise.id}>
