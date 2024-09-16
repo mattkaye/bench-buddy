@@ -2,16 +2,18 @@ import { useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import { ExerciseFilter } from "../../types";
 
-const Filter = ({
-  data,
-  programExercises,
-  setProgramExercises,
-}: {
-  data: ExerciseFilter;
-  programExercises: { label: string; value: string }[];
-  setProgramExercises: { label: string; value: string }[];
-}) => {
+const Filter = ({ data, setFilteredExercises }: { data: ExerciseFilter }) => {
   const [exerciseDimension, setDimension] = useState([]);
+
+  const handleDimensionChange = (value: { label: string; value: string }[]) => {
+    setDimension(value);
+    setFilteredExercises((prev) => {
+      return {
+        ...prev,
+        [data.type]: value,
+      };
+    });
+  };
 
   const customValueRenderer = (
     selected: { label: string; value: string }[],
@@ -26,7 +28,7 @@ const Filter = ({
       valueRenderer={customValueRenderer}
       options={data.options}
       value={exerciseDimension}
-      onChange={setDimension}
+      onChange={handleDimensionChange}
       labelledBy={`Select ${data.type}`}
     />
   );

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { FaCircleChevronUp } from "react-icons/fa6";
 import { Modality, MuscleGroup, Equipment, Level } from "./constants";
+import { filterExercises } from "./helpers";
 import Header from "./components/Header";
 import Filter from "./components/Filter";
 import Footer from "./components/Footer";
@@ -10,7 +11,11 @@ import styles from "./components/Filter/styles.module.css";
 import "./common.css";
 
 function App() {
-  const [programExercises, setProgramExercises] = useState([]);
+  const [filteredExercises, setFilteredExercises] = useState({});
+
+  useEffect(() => {
+    console.log(filterExercises(filteredExercises));
+  }, [filteredExercises]);
 
   return (
     <>
@@ -18,8 +23,7 @@ function App() {
       <div className={styles.filterForm}>
         <form>
           <Filter
-            setProgramExercises={setProgramExercises}
-            programExercises={programExercises}
+            setFilteredExercises={setFilteredExercises}
             data={{
               type: "Muscle Groups",
               options: Object.keys(MuscleGroup).map((key) => {
@@ -31,8 +35,7 @@ function App() {
             }}
           />
           <Filter
-            setProgramExercises={setProgramExercises}
-            programExercises={programExercises}
+            setFilteredExercises={setFilteredExercises}
             data={{
               type: "Modality",
               options: Object.keys(Modality).map((key) => {
@@ -44,8 +47,7 @@ function App() {
             }}
           />
           <Filter
-            setProgramExercises={setProgramExercises}
-            programExercises={programExercises}
+            setFilteredExercises={setFilteredExercises}
             data={{
               type: "Equipment",
               options: Object.keys(Equipment).map((key) => {
@@ -57,8 +59,7 @@ function App() {
             }}
           />
           <Filter
-            setProgramExercises={setProgramExercises}
-            programExercises={programExercises}
+            setFilteredExercises={setFilteredExercises}
             data={{
               type: "Difficulty Level",
               options: Object.keys(Level).map((key) => {
