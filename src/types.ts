@@ -13,6 +13,7 @@ export type Exercise = {
 };
 
 export type ExerciseFilter = {
-  type: string;
+  jsonKey: string;
+  label: string;
   options: { label: string; value: string }[];
 };

@@ -25,7 +25,8 @@ function App() {
           <Filter
             setFilteredExercises={setFilteredExercises}
             data={{
-              type: "Muscle Groups",
+              label: "Muscle Group",
+              jsonKey: "primaryMuscles",
               options: Object.keys(MuscleGroup).map((key) => {
                 return {
                   label: MuscleGroup[key as keyof typeof MuscleGroup],
@@ -37,7 +38,8 @@ function App() {
           <Filter
             setFilteredExercises={setFilteredExercises}
             data={{
-              type: "Modality",
+              label: "Category",
+              jsonKey: "category",
               options: Object.keys(Modality).map((key) => {
                 return {
                   label: Modality[key as keyof typeof Modality],
@@ -49,7 +51,8 @@ function App() {
           <Filter
             setFilteredExercises={setFilteredExercises}
             data={{
-              type: "Equipment",
+              label: "Equipment",
+              jsonKey: "equipment",
               options: Object.keys(Equipment).map((key) => {
                 return {
                   label: Equipment[key as keyof typeof Equipment],
@@ -61,7 +64,8 @@ function App() {
           <Filter
             setFilteredExercises={setFilteredExercises}
             data={{
-              type: "Difficulty Level",
+              label: "Difficulty Level",
+              jsonKey: "level",
               options: Object.keys(Level).map((key) => {
                 return {
                   label: Level[key as keyof typeof Level],

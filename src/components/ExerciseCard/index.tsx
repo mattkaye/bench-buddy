@@ -36,6 +36,7 @@ const ExerciseCard = ({ data }: { data: Exercise }) => {
             src={`/images/exercises/${image}`}
             alt={`${data.name} ${index === 0 ? "starting" : "ending"} position`}
             key={index}
+            loading='lazy'
           />
         ))}
       </div>
