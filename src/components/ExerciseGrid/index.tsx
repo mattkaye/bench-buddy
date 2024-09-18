@@ -1,6 +1,6 @@
 import ExerciseCard from "../ExerciseCard";
 import styles from "./styles.module.css";
-import allExercises from "../../data/all-exercises.json";
+import allExercises from "../../data/all-exercises-min.json";
 import { Exercise } from "../../types";
 
 const result: Exercise[] = allExercises.filter((exercise) => {
