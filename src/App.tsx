@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { FaCircleChevronUp } from "react-icons/fa6";
 import { Modality, MuscleGroup, Equipment, Level } from "./constants";
-import { filterExercises } from "./helpers";
+import { filterExerciseResults } from "./helpers";
+import allExercises from "./data/all-exercises-min.json";
 import Header from "./components/Header";
 import Filter from "./components/Filter";
 import Footer from "./components/Footer";
@@ -14,7 +15,18 @@ function App() {
   const [filteredExercises, setFilteredExercises] = useState({});
 
   useEffect(() => {
-    console.log(filterExercises(filteredExercises));
+    let result = allExercises;
+    const filterKeys = Object.keys(filteredExercises);
+
+    for (let index = 0; index < filterKeys.length; index++) {
+      const key = filterKeys[index];
+      let fliterValues = filteredExercises[key].map((item) => item.value);
+
+      if (fliterValues.length > 0) {
+        result = filterExerciseResults(result, key, fliterValues);
+      }
+    }
+    console.log("final result: ", result);
   }, [filteredExercises]);
 
   return (
