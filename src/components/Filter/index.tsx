@@ -4,16 +4,16 @@ import { ExerciseFilter } from "../../types";
 
 const Filter = ({
   data,
-  setFilteredExercises,
+  setChosenFilters,
 }: {
-  setFilteredExercises: any;
+  setChosenFilters: any;
   data: ExerciseFilter;
 }) => {
-  const [exerciseDimension, setDimension] = useState([]);
+  const [ExerciseFilter, setExerciseFilter] = useState([]);
 
-  const handleDimensionChange = (value: { label: string; value: string }[]) => {
-    setDimension(value);
-    setFilteredExercises((prev) => {
+  const handleFilterChange = (value: { label: string; value: string }[]) => {
+    setExerciseFilter(value);
+    setChosenFilters((prev) => {
       return {
         ...prev,
         [data.jsonKey]: value,
@@ -33,8 +33,8 @@ const Filter = ({
       key={data.jsonKey}
       valueRenderer={customValueRenderer}
       options={data.options}
-      value={exerciseDimension}
-      onChange={handleDimensionChange}
+      value={ExerciseFilter}
+      onChange={handleFilterChange}
       labelledBy={`Select ${data.label}`}
     />
   );

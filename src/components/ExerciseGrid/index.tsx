@@ -1,19 +1,12 @@
 import ExerciseCard from "../ExerciseCard";
 import styles from "./styles.module.css";
-import allExercises from "../../data/all-exercises-min.json";
 import { Exercise } from "../../types";
 
-const result: Exercise[] = allExercises.filter((exercise) => {
-  return exercise.primaryMuscles.includes("chest");
-  // return exercise;
-});
-// console.log(result);
-
-const ExerciseGrid = () => {
+const ExerciseGrid = ({ data }: { data: Exercise[] }) => {
   return (
     <section className={styles.componentWrapper}>
       <ul>
-        {result.map((exercise) => (
+        {data.map((exercise) => (
           <li key={exercise.id}>
             <ExerciseCard data={exercise} />
           </li>

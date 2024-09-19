@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IconContext } from "react-icons";
 import { FaCircleChevronUp } from "react-icons/fa6";
 import { Modality, MuscleGroup, Equipment, Level } from "./constants";
@@ -8,26 +8,39 @@ import Header from "./components/Header";
 import Filter from "./components/Filter";
 import Footer from "./components/Footer";
 import ExerciseGrid from "./components/ExerciseGrid";
+import NoSearchResults from "./components/NoSearchResults";
 import styles from "./components/Filter/styles.module.css";
 import "./common.css";
 
 function App() {
-  const [filteredExercises, setFilteredExercises] = useState({});
+  const [chosenFilters, setChosenFilters] = useState({});
+  const [exerciseResults, setExerciseResults] = useState([]);
+  let filteredExercises = [];
 
   useEffect(() => {
-    let result = allExercises;
-    const filterKeys = Object.keys(filteredExercises);
+    filteredExercises = allExercises;
+    const filterKeys = Object.keys(chosenFilters);
 
     for (let index = 0; index < filterKeys.length; index++) {
       const key = filterKeys[index];
-      let fliterValues = filteredExercises[key].map((item) => item.value);
+      let fliterValues = chosenFilters[key].map((item) => item.value);
 
       if (fliterValues.length > 0) {
-        result = filterExerciseResults(result, key, fliterValues);
+        filteredExercises = filterExerciseResults(
+          filteredExercises,
+          key,
+          fliterValues
+        );
       }
     }
-    console.log("final result: ", result);
-  }, [filteredExercises]);
+    setExerciseResults(filtersAreEmpty ? [] : filteredExercises);
+  }, [chosenFilters]);
+
+  const filtersAreEmpty = useMemo(() => {
+    return (
+      Object.values(chosenFilters).filter((item) => item.length).length === 0
+    );
+  }, [chosenFilters]);
 
   return (
     <>
@@ -35,7 +48,7 @@ function App() {
       <div className={styles.filterForm}>
         <form>
           <Filter
-            setFilteredExercises={setFilteredExercises}
+            setChosenFilters={setChosenFilters}
             data={{
               label: "Muscle Group",
               jsonKey: "primaryMuscles",
@@ -48,7 +61,7 @@ function App() {
             }}
           />
           <Filter
-            setFilteredExercises={setFilteredExercises}
+            setChosenFilters={setChosenFilters}
             data={{
               label: "Category",
               jsonKey: "category",
@@ -61,7 +74,7 @@ function App() {
             }}
           />
           <Filter
-            setFilteredExercises={setFilteredExercises}
+            setChosenFilters={setChosenFilters}
             data={{
               label: "Equipment",
               jsonKey: "equipment",
@@ -74,7 +87,7 @@ function App() {
             }}
           />
           <Filter
-            setFilteredExercises={setFilteredExercises}
+            setChosenFilters={setChosenFilters}
             data={{
               label: "Difficulty Level",
               jsonKey: "level",
@@ -89,15 +102,20 @@ function App() {
         </form>
       </div>
       <main>
-        {/* Call for the filtered json data in App and pass it to <ExerciseGrid /> */}
-        <ExerciseGrid />
+        {exerciseResults.length === 0 ? (
+          <NoSearchResults />
+        ) : (
+          <ExerciseGrid data={exerciseResults} />
+        )}
       </main>
       <Footer />
-      <IconContext.Provider value={{ className: "backToTopIcon" }}>
-        <a href='#' className='backToTop'>
-          <FaCircleChevronUp />
-        </a>
-      </IconContext.Provider>
+      {exerciseResults.length > 0 && (
+        <IconContext.Provider value={{ className: "backToTopIcon" }}>
+          <a href='#' className='backToTop'>
+            <FaCircleChevronUp />
+          </a>
+        </IconContext.Provider>
+      )}
     </>
   );
 }

@@ -1,0 +1,16 @@
+.componentWrapper {
+  display: grid;
+  justify-items: center;
+  padding-inline: 2rem;
+  padding-block: 4rem;
+
+  h1 {
+    text-align: center;
+    text-wrap: balance;
+    max-width: 50rem;
+  }
+
+  .svgIcon {
+    font-size: 8rem;
+  }
+}

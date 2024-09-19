@@ -17,7 +17,6 @@
 }
 
 html {
-  min-height: 100%;
   scroll-behavior: smooth;
 }
 
@@ -26,15 +25,14 @@ body {
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
-  height: 100%;
   background-color: var(--beige);
 }
 
 #root {
+  display: grid;
   max-width: 1500px;
   margin: 0 auto;
   padding: 2rem 2rem 0;
-  display: grid;
   gap: 2rem;
 }
 
