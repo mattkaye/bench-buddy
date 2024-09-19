@@ -1,14 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { IconContext } from "react-icons";
 import { FaCircleChevronUp } from "react-icons/fa6";
+import { Route, Routes } from "react-router-dom";
 import { Modality, MuscleGroup, Equipment, Level } from "./constants";
 import { filterExerciseResults } from "./helpers";
 import allExercises from "./data/all-exercises-min.json";
 import Header from "./components/Header";
 import Filter from "./components/Filter";
-import Footer from "./components/Footer";
 import ExerciseGrid from "./components/ExerciseGrid";
+import Exercise from "./components/Exercise";
 import NoSearchResults from "./components/NoSearchResults";
+import Footer from "./components/Footer";
 import styles from "./components/Filter/styles.module.css";
 import "./common.css";
 
@@ -102,11 +104,11 @@ function App() {
         </form>
       </div>
       <main>
-        {exerciseResults.length === 0 ? (
-          <NoSearchResults />
-        ) : (
-          <ExerciseGrid data={exerciseResults} />
-        )}
+        <Routes>
+          <Route path='/' element={<ExerciseGrid data={exerciseResults} />} />
+          <Route path='/exercise/:id' element={<Exercise />} />
+        </Routes>
+        {exerciseResults.length === 0 ? <NoSearchResults /> : null}
       </main>
       <Footer />
       {exerciseResults.length > 0 && (

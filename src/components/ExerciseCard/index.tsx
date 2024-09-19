@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { RxOpenInNewWindow } from "react-icons/rx";
 import { SiLevelsdotfyi } from "react-icons/si";
@@ -61,6 +62,8 @@ const ExerciseCard = ({ data }: { data: Exercise }) => {
               Show Me <RxOpenInNewWindow />
             </button>
           </IconContext.Provider>
+
+          <Link to={`/exercise/${data.id}`}>Go To {data.name}</Link>
         </div>
       </div>
     </div>
