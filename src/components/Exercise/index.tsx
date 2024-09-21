@@ -1,14 +1,73 @@
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { IconContext } from "react-icons";
+import { FaArrowLeft } from "react-icons/fa6";
+import styles from "./styles.module.css";
 
 function Exercise() {
-  const { id } = useParams(); // Get the dynamic ID from the route
+  const { state } = useLocation();
+  const navigate = useNavigate();
 
-  return (
-    <div>
-      <h1>Exercise Page</h1>
-      <p>ID: {id}</p> {/* Display the dynamic ID */}
-    </div>
-  );
+  if (state === null) {
+    navigate("/");
+    return;
+  } else {
+    return (
+      <section className={styles.componentWrapper}>
+        <Link to='/'>
+          <IconContext.Provider value={{ className: styles.svgIcon }}>
+            <FaArrowLeft />
+          </IconContext.Provider>
+          Back To Exercises
+        </Link>
+        <div>
+          <div className={styles.imageWrapper}>
+            {state.images.map((image, index) => (
+              <img
+                src={`/images/exercises/${image}`}
+                alt={`${state.name} ${
+                  index === 0 ? "starting" : "ending"
+                } position`}
+                key={index}
+                loading='lazy'
+              />
+            ))}
+          </div>
+          <article>
+            <h1>{state.name}</h1>
+            <ul>
+              <li>
+                Effort Level: <span>{state.level}</span>
+              </li>
+              <li>
+                Primary Muscles: <span>{state.primaryMuscles.join(", ")}</span>
+              </li>
+              {state.secondaryMuscles.length ? (
+                <li>
+                  Secondary Muscles:{" "}
+                  <span>{state.secondaryMuscles.join(", ")}</span>
+                </li>
+              ) : null}
+              <li>
+                Modality: <span>{state.mechanic}</span>
+              </li>
+              <li>
+                Equipment: <span>{state.equipment}</span>
+              </li>
+              <li>
+                Category: <span>{state.category}</span>
+              </li>
+            </ul>
+            <div className={styles.instructions}>
+              <h2>Instructions</h2>
+              {state.instructions.map((line, index) => (
+                <p key={index}>{line}</p>
+              ))}
+            </div>
+          </article>
+        </div>
+      </section>
+    );
+  }
 }
 
 export default Exercise;

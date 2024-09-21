@@ -1,0 +1,102 @@
+.componentWrapper {
+  display: grid;
+  gap: 2rem;
+  > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    position: relative;
+  }
+
+  .imageWrapper {
+    display: grid;
+    position: relative;
+
+    img :global {
+      animation-name: fade;
+      animation-iteration-count: infinite;
+      animation-duration: 4s;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      z-index: 1;
+      border-radius: 20px;
+
+      &:nth-of-type(2) {
+        animation-delay: -2s;
+      }
+
+      &:last-of-type {
+        position: absolute;
+        z-index: 5;
+      }
+    }
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    background: var(--yellow);
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 20px;
+    margin: 0;
+    max-width: fit-content;
+
+    li {
+      font-weight: 500;
+      font-size: 1.25rem;
+      span {
+        font-weight: normal;
+        font-size: 1rem;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  .instructions {
+    h2 {
+      font-size: 1.5rem;
+    }
+    p {
+      line-height: 1.2;
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    border: none;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    background-color: var(--deep-blue);
+    color: white;
+    cursor: pointer;
+    justify-self: start;
+    transition: var(--common-transition);
+
+    .svgIcon {
+      width: 0;
+      height: 1rem;
+      transition: var(--common-transition);
+    }
+
+    &:hover {
+      background-color: var(--green);
+
+      .svgIcon {
+        width: 1rem;
+      }
+    }
+  }
+}

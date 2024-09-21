@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { IconContext } from "react-icons";
-import { FaCircleChevronUp } from "react-icons/fa6";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Modality, MuscleGroup, Equipment, Level } from "./constants";
 import { filterExerciseResults } from "./helpers";
 import allExercises from "./data/all-exercises-min.json";
@@ -13,8 +11,10 @@ import NoSearchResults from "./components/NoSearchResults";
 import Footer from "./components/Footer";
 import styles from "./components/Filter/styles.module.css";
 import "./common.css";
+import BackToTop from "./components/BackToTop";
 
 function App() {
+  const { pathname } = useLocation();
   const [chosenFilters, setChosenFilters] = useState({});
   const [exerciseResults, setExerciseResults] = useState([]);
   let filteredExercises = [];
@@ -43,6 +43,10 @@ function App() {
       Object.values(chosenFilters).filter((item) => item.length).length === 0
     );
   }, [chosenFilters]);
+
+  const exerciseResultsAreShowing = () => {
+    return exerciseResults.length && pathname === "/";
+  };
 
   return (
     <>
@@ -105,19 +109,21 @@ function App() {
       </div>
       <main>
         <Routes>
-          <Route path='/' element={<ExerciseGrid data={exerciseResults} />} />
+          <Route
+            path='/'
+            element={
+              exerciseResults.length === 0 ? (
+                <NoSearchResults />
+              ) : (
+                <ExerciseGrid data={exerciseResults} />
+              )
+            }
+          />
           <Route path='/exercise/:id' element={<Exercise />} />
         </Routes>
-        {exerciseResults.length === 0 ? <NoSearchResults /> : null}
       </main>
       <Footer />
-      {exerciseResults.length > 0 && (
-        <IconContext.Provider value={{ className: "backToTopIcon" }}>
-          <a href='#' className='backToTop'>
-            <FaCircleChevronUp />
-          </a>
-        </IconContext.Provider>
-      )}
+      {exerciseResultsAreShowing() ? <BackToTop /> : null}
     </>
   );
 }

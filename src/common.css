@@ -56,33 +56,6 @@ img {
   font-style: italic;
 }
 
-.backToTop {
-  --offset: 500px;
-  display: grid;
-  width: fit-content;
-  /* margin-top: calc(100dvh + 500px); */
-  position: sticky;
-  left: 100%;
-  bottom: 0.5rem;
-  transform: translateX(100%);
-  color: var(--black);
-  z-index: 5;
-  transition: var(--common-transition);
-  background-color: var(--yellow);
-  border-radius: 100%;
-  padding: 0.25rem;
-
-  &:hover {
-    bottom: 1rem;
-  }
-
-  .backToTopIcon {
-    fill: var(--black);
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-}
-
 @keyframes fade {
   0% {
     opacity: 0;

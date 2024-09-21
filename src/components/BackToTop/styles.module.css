@@ -1,0 +1,24 @@
+.backToTop {
+  display: grid;
+  width: fit-content;
+  position: sticky;
+  left: 100%;
+  bottom: 0.5rem;
+  transform: translateX(100%);
+  color: var(--black);
+  z-index: 5;
+  transition: var(--common-transition);
+  background-color: var(--yellow);
+  border-radius: 100%;
+  padding: 0.25rem;
+
+  &:hover {
+    bottom: 1rem;
+  }
+
+  .backToTopIcon {
+    fill: var(--black);
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

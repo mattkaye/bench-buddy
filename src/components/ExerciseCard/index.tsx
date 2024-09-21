@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { RxOpenInNewWindow } from "react-icons/rx";
 import { SiLevelsdotfyi } from "react-icons/si";
@@ -9,6 +9,7 @@ import styles from "./styles.module.css";
 
 const ExerciseCard = ({ data }: { data: Exercise }) => {
   const [added, setAdded] = useState(false);
+  const navigate = useNavigate();
 
   const handleToggleExerciseAdded = () => {
     setAdded((prev) => !prev);
@@ -58,12 +59,12 @@ const ExerciseCard = ({ data }: { data: Exercise }) => {
         <div className={styles.buttonWrapper}>
           {toggleExerciseButton()}
           <IconContext.Provider value={{ className: styles.showMeIcon }}>
-            <button>
+            <button
+              onClick={() => navigate(`/exercise/${data.id}`, { state: data })}
+            >
               Show Me <RxOpenInNewWindow />
             </button>
           </IconContext.Provider>
-
-          <Link to={`/exercise/${data.id}`}>Go To {data.name}</Link>
         </div>
       </div>
     </div>
