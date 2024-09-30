@@ -25,7 +25,7 @@ function App() {
 
     for (let index = 0; index < filterKeys.length; index++) {
       const key = filterKeys[index];
-      let fliterValues = chosenFilters[key].map((item) => item.value);
+      const fliterValues = chosenFilters[key].map((item) => item.value);
 
       if (fliterValues.length > 0) {
         filteredExercises = filterExerciseResults(
@@ -50,62 +50,64 @@ function App() {
 
   return (
     <>
-      <Header />
-      <div className={styles.filterForm}>
-        <form>
-          <Filter
-            setChosenFilters={setChosenFilters}
-            data={{
-              label: "Muscle Group",
-              jsonKey: "primaryMuscles",
-              options: Object.keys(MuscleGroup).map((key) => {
-                return {
-                  label: MuscleGroup[key as keyof typeof MuscleGroup],
-                  value: key,
-                };
-              }),
-            }}
-          />
-          <Filter
-            setChosenFilters={setChosenFilters}
-            data={{
-              label: "Category",
-              jsonKey: "category",
-              options: Object.keys(Modality).map((key) => {
-                return {
-                  label: Modality[key as keyof typeof Modality],
-                  value: key,
-                };
-              }),
-            }}
-          />
-          <Filter
-            setChosenFilters={setChosenFilters}
-            data={{
-              label: "Equipment",
-              jsonKey: "equipment",
-              options: Object.keys(Equipment).map((key) => {
-                return {
-                  label: Equipment[key as keyof typeof Equipment],
-                  value: key,
-                };
-              }),
-            }}
-          />
-          <Filter
-            setChosenFilters={setChosenFilters}
-            data={{
-              label: "Difficulty Level",
-              jsonKey: "level",
-              options: Object.keys(Level).map((key) => {
-                return {
-                  label: Level[key as keyof typeof Level],
-                  value: key,
-                };
-              }),
-            }}
-          />
-        </form>
+      <div className='stickyHeader'>
+        <Header />
+        <div className={styles.filterForm}>
+          <form>
+            <Filter
+              setChosenFilters={setChosenFilters}
+              data={{
+                label: "Muscle Group",
+                jsonKey: "primaryMuscles",
+                options: Object.keys(MuscleGroup).map((key) => {
+                  return {
+                    label: MuscleGroup[key as keyof typeof MuscleGroup],
+                    value: key,
+                  };
+                }),
+              }}
+            />
+            <Filter
+              setChosenFilters={setChosenFilters}
+              data={{
+                label: "Category",
+                jsonKey: "category",
+                options: Object.keys(Modality).map((key) => {
+                  return {
+                    label: Modality[key as keyof typeof Modality],
+                    value: key,
+                  };
+                }),
+              }}
+            />
+            <Filter
+              setChosenFilters={setChosenFilters}
+              data={{
+                label: "Equipment",
+                jsonKey: "equipment",
+                options: Object.keys(Equipment).map((key) => {
+                  return {
+                    label: Equipment[key as keyof typeof Equipment],
+                    value: key,
+                  };
+                }),
+              }}
+            />
+            <Filter
+              setChosenFilters={setChosenFilters}
+              data={{
+                label: "Difficulty Level",
+                jsonKey: "level",
+                options: Object.keys(Level).map((key) => {
+                  return {
+                    label: Level[key as keyof typeof Level],
+                    value: key,
+                  };
+                }),
+              }}
+            />
+          </form>
+        </div>
       </div>
       <main>
         <Routes>

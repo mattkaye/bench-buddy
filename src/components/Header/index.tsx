@@ -1,5 +1,3 @@
-import { IconContext } from "react-icons";
-import { PiNotebookLight } from "react-icons/pi";
 import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -14,12 +12,6 @@ const Header = () => {
           Bench<span>Buddy</span>
         </h1>
       </div>
-      <button className={styles.cartButton}>
-        <IconContext.Provider value={{ className: styles.notebook }}>
-          <PiNotebookLight />
-          <p>My Program</p>
-        </IconContext.Provider>
-      </button>
     </header>
   );
 };

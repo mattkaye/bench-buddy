@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  background-color: var(--yellow);
+  padding: 1rem;
 
   form {
     display: grid;

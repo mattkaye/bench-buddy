@@ -21,7 +21,7 @@ function Exercise() {
         </Link>
         <div>
           <div className={styles.imageWrapper}>
-            {state.images.map((image, index) => (
+            {state.images.map((image: string, index: number) => (
               <img
                 src={`/images/exercises/${image}`}
                 alt={`${state.name} ${
@@ -59,7 +59,7 @@ function Exercise() {
             </ul>
             <div className={styles.instructions}>
               <h2>Instructions</h2>
-              {state.instructions.map((line, index) => (
+              {state.instructions.map((line: string, index: number) => (
                 <p key={index}>{line}</p>
               ))}
             </div>

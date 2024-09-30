@@ -61,6 +61,8 @@
   }
 
   .instructions {
+    max-width: 65ch;
+
     h2 {
       font-size: 1.5rem;
     }

@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  padding-block: 2rem;
 
   > div {
     display: grid;
@@ -23,14 +24,6 @@
         color: var(--grey);
       }
     }
-  }
-
-  form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
-    grid-column: 1 / -1;
-    z-index: 10;
   }
 
   .cartButton {
