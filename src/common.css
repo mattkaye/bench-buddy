@@ -77,6 +77,27 @@ img {
   }
 }
 
+.hidden {
+  display: none;
+}
+
+.toggleFilters {
+  display: flex;
+  width: max-content;
+  margin-left: auto;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+  text-decoration: none;
+  color: var(--deep-blue);
+  align-items: center;
+  justify-content: flex-end;
+
+  .filterIcon {
+    font-size: 1.5rem;
+    margin-right: 0.25rem;
+  }
+}
+
 @keyframes fade {
   0% {
     opacity: 0;

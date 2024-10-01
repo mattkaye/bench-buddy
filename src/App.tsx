@@ -3,6 +3,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { Modality, MuscleGroup, Equipment, Level } from "./constants";
 import { filterExerciseResults } from "./helpers";
 import allExercises from "./data/all-exercises-min.json";
+import { BiSolidShow, BiSolidHide } from "react-icons/bi";
+import { IconContext } from "react-icons";
 import Header from "./components/Header";
 import Filter from "./components/Filter";
 import ExerciseGrid from "./components/ExerciseGrid";
@@ -15,6 +17,7 @@ import BackToTop from "./components/BackToTop";
 
 function App() {
   const { pathname } = useLocation();
+  const [filtersHidden, setFiltersHidden] = useState(false);
   const [chosenFilters, setChosenFilters] = useState({});
   const [exerciseResults, setExerciseResults] = useState([]);
   let filteredExercises = [];
@@ -48,66 +51,82 @@ function App() {
     return exerciseResults.length && pathname === "/";
   };
 
+  const toggleFilterVisibility = (e) => {
+    e.preventDefault();
+    setFiltersHidden(!filtersHidden);
+  };
+
   return (
     <>
       <div className='stickyHeader'>
         <Header />
-        <div className={styles.filterForm}>
-          <form>
-            <Filter
-              setChosenFilters={setChosenFilters}
-              data={{
-                label: "Muscle Group",
-                jsonKey: "primaryMuscles",
-                options: Object.keys(MuscleGroup).map((key) => {
-                  return {
-                    label: MuscleGroup[key as keyof typeof MuscleGroup],
-                    value: key,
-                  };
-                }),
-              }}
-            />
-            <Filter
-              setChosenFilters={setChosenFilters}
-              data={{
-                label: "Category",
-                jsonKey: "category",
-                options: Object.keys(Modality).map((key) => {
-                  return {
-                    label: Modality[key as keyof typeof Modality],
-                    value: key,
-                  };
-                }),
-              }}
-            />
-            <Filter
-              setChosenFilters={setChosenFilters}
-              data={{
-                label: "Equipment",
-                jsonKey: "equipment",
-                options: Object.keys(Equipment).map((key) => {
-                  return {
-                    label: Equipment[key as keyof typeof Equipment],
-                    value: key,
-                  };
-                }),
-              }}
-            />
-            <Filter
-              setChosenFilters={setChosenFilters}
-              data={{
-                label: "Difficulty Level",
-                jsonKey: "level",
-                options: Object.keys(Level).map((key) => {
-                  return {
-                    label: Level[key as keyof typeof Level],
-                    value: key,
-                  };
-                }),
-              }}
-            />
-          </form>
-        </div>
+        <IconContext.Provider value={{ className: "filterIcon" }}>
+          <a
+            className='toggleFilters'
+            href='#'
+            onClick={toggleFilterVisibility}
+          >
+            {filtersHidden ? <BiSolidHide /> : <BiSolidShow />} Toggle Filters
+          </a>
+        </IconContext.Provider>
+        {!filtersHidden && (
+          <div className={styles.filterForm}>
+            <form>
+              <Filter
+                setChosenFilters={setChosenFilters}
+                data={{
+                  label: "Muscle Group",
+                  jsonKey: "primaryMuscles",
+                  options: Object.keys(MuscleGroup).map((key) => {
+                    return {
+                      label: MuscleGroup[key as keyof typeof MuscleGroup],
+                      value: key,
+                    };
+                  }),
+                }}
+              />
+              <Filter
+                setChosenFilters={setChosenFilters}
+                data={{
+                  label: "Category",
+                  jsonKey: "category",
+                  options: Object.keys(Modality).map((key) => {
+                    return {
+                      label: Modality[key as keyof typeof Modality],
+                      value: key,
+                    };
+                  }),
+                }}
+              />
+              <Filter
+                setChosenFilters={setChosenFilters}
+                data={{
+                  label: "Equipment",
+                  jsonKey: "equipment",
+                  options: Object.keys(Equipment).map((key) => {
+                    return {
+                      label: Equipment[key as keyof typeof Equipment],
+                      value: key,
+                    };
+                  }),
+                }}
+              />
+              <Filter
+                setChosenFilters={setChosenFilters}
+                data={{
+                  label: "Difficulty Level",
+                  jsonKey: "level",
+                  options: Object.keys(Level).map((key) => {
+                    return {
+                      label: Level[key as keyof typeof Level],
+                      value: key,
+                    };
+                  }),
+                }}
+              />
+            </form>
+          </div>
+        )}
       </div>
       <main>
         <Routes>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -6,6 +7,10 @@ import styles from "./styles.module.css";
 function Exercise() {
   const { state } = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   if (state === null) {
     navigate("/");

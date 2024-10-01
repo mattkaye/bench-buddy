@@ -4,6 +4,7 @@
   gap: 1rem;
   background-color: var(--yellow);
   padding: 1rem;
+  transition: var(--common-transition);
 
   form {
     display: grid;
