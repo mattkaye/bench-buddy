@@ -2,15 +2,17 @@
   display: grid;
   width: fit-content;
   position: sticky;
-  left: 100%;
   bottom: 0.5rem;
-  transform: translateX(100%);
   color: var(--black);
   z-index: 5;
   transition: var(--common-transition);
   background-color: var(--yellow);
   border-radius: 100%;
   padding: 0.25rem;
+
+  @media (width > 768px) {
+    left: 100%;
+  }
 
   &:hover {
     bottom: 1rem;

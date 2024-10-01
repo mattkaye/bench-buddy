@@ -4,8 +4,12 @@
   > div {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
+    gap: 1rem;
     position: relative;
+
+    @media (width > 768px) {
+      gap: 3rem;
+    }
   }
 
   .imageWrapper {
@@ -47,7 +51,11 @@
     padding: 1rem;
     border-radius: 20px;
     margin: 0;
-    max-width: fit-content;
+    max-width: none;
+
+    @media (width > 768px) {
+      max-width: fit-content;
+    }
 
     li {
       font-weight: 500;
@@ -68,6 +76,7 @@
     }
     p {
       line-height: 1.2;
+      font-size: 1.2rem;
     }
   }
 
